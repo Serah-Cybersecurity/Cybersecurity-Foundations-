@@ -1,4 +1,4 @@
-# CYBERSECURITY LEARNING LOG
+# CYBERSECURITY LEARNING LOG 
 Hands-on cybersecurity foundations: Linux, networking, SOC fundamentals, and defensive security labs.
 # Cybersecurity Foundations Portfolio
 
