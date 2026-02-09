@@ -55,7 +55,7 @@ Parrot OS is designed specifically for cybersecurity professionals. It includes 
 ---
 
 ## Badges & Progress Evidence
-(https://tryhackme.com/p/CyberpunkSue)
+**TryHackMe Profile:** (https://tryhackme.com/p/CyberpunkSue)
 
 Badges earned by completing foundational cybersecurity orientation content on TryHackMe, demonstrating early engagement with hands-on security learning.
 
