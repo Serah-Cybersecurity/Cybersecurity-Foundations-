@@ -79,7 +79,6 @@ Repeated hands-on practice by intentionally navigating incorrectly, correcting m
 - Created and edited files from the terminal
 - Demonstrated basic command-line confidence within the Parrot OS environment
 
-(Screenshots and additional artifacts may be added as the lab environment evolves.)
 
 ---
 
