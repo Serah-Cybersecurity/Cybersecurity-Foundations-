@@ -80,11 +80,17 @@ echo "[+] Scan Complete."
 echo "=========================================="
 
 
-##  Badges & Progress Evidence
+* ## 🏆 Badges & Progress Evidence
 * **TryHackMe Profile:** [https://tryhackme.com/p/CyberpunkSue](https://tryhackme.com/p/CyberpunkSue)
-* **Evidence:** Completion of "Linux Fundamentals " 
-* **Log Forensic Trace:** Successfully simulated a brute-force SSH attack and utilized `journalctl` to capture the 5-entry "Failed Password" sequence.
+* **Log Forensic Trace:** Successfully captured SSH authentication failures in the system journal.
+* **Automation Implementation:** Authored and debugged a Bash-based log parser.
+
+### 🖼️ Technical Evidence Vault
 * **Automation Implementation:** [View scan_logs.sh Script & Execution Screenshots](Evidence/)
+* **[System Audit] (Day3 Filesystem Audit.png):** Navigating the `/etc` hierarchy to analyze user credential structures.
+* **[Access Control](Day3 Permissions logic.png):** Modifying file mode bits (`chmod 700`) to demonstrate the Principle of Least Privilege.
+* **[Service Hardening](Day3 Service status attack.png):** Managing the SSH daemon via `systemctl` to enable secure listeners.
+* **[The SOC Win](Day3 Soc automation success.png):** Final execution of `scan_logs.sh` successfully detecting a brute-force simulation after a technical pivot.
 
 ## Security-Relevant Takeaways
 * **Permissions are the First Line of Defense:** Mastering `chmod` and `chown` isn't just about file organization; it's about enforcing the **Principle of Least Privilege** to prevent an attacker from escalating their access.
