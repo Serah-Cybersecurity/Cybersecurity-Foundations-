@@ -78,3 +78,15 @@ The most valuable part of today wasn't the successful run; it was the process of
 echo "------------------------------------------"
 echo "[+] Scan Complete."
 echo "=========================================="
+
+
+## 🏆 Badges & Progress Evidence
+* **TryHackMe Profile:** [https://tryhackme.com/p/CyberpunkSue](https://tryhackme.com/p/CyberpunkSue)
+* **Evidence:** Completion of "Linux Fundamentals " 
+* **Log Forensic Trace:** Successfully simulated a brute-force SSH attack and utilized `journalctl` to capture the 5-entry "Failed Password" sequence.
+* **Automation Implementation:** [View scan_logs.sh Script & Execution Screenshots](Evidence/)
+
+## 🛡️ Security-Relevant Takeaways
+* **Permissions are the First Line of Defense:** Mastering `chmod` and `chown` isn't just about file organization; it's about enforcing the **Principle of Least Privilege** to prevent an attacker from escalating their access.
+* **Automation is a Force Multiplier:** In Hour 5, I learned that a SOC analyst shouldn't just "read" logs. By scripting the search process, I reduced the **Mean Time to Detect (MTTD)** from several minutes of manual searching to 1.5 seconds of automated execution.
+* **The "Persistence" Mindset:** Troubleshooting "Connection Refused" (SSH service management) and script typos taught me that in cybersecurity, technical resilience is just as important as technical knowledge. You have to understand the underlying service to secure it.
