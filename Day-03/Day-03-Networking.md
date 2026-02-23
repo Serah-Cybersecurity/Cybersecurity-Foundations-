@@ -1,92 +1,80 @@
-# Day 02 – Networking Fundamentals & Packet Analysis
+# Day 03: Linux Fundamentals & Security Automation
 
-* **Live Traffic Analysis:** * [View Captured ICMP Screenshot](Images/evidence_one_wireshark.JPG)
-## Overview
-Day 2 transitions from the local system to the network, the primary battleground of cybersecurity. Understanding how data moves, how services are exposed, and how to intercept and analyze traffic is the prerequisite for both offensive security and defensive monitoring.
-This day focused on "visibility"—the ability to see what is happening on the wire and interpret the digital signatures of various protocols.
+## 🎯 Overview
+Today, I moved completely away from the GUI and spent over 6 hours navigating the Parrot OS terminal. I learned that Linux isn't just an operating system; it's a hierarchical security framework. My objective was to understand access control, service management, and how to automate forensic log analysis. 
 
-## Objectives
-* Master the OSI Model as a diagnostic and security framework.
-* Verify network reachability and pathing using ICMP.
-* Enumerate listening services and understand Port logic.
-* Perform active network discovery and OS fingerprinting with Nmap.
-* Deconstruct DNS and DHCP infrastructure protocols.
-* Conduct deep packet inspection using Wireshark and tcpdump.
+## 🧠 Key Concepts Mastered
 
-## The Networking Stack: Theory & Framework
+### 1. The Filesystem Hierarchy
+Linux operates on the philosophy that "Everything is a file." I navigated critical security paths to understand where a system is most vulnerable and where it stores its evidence.
+* **`/etc`**: The nerve center containing system configurations, including sensitive files like `passwd` and `shadow`.
+* **`/var/log`**: The primary repository for system events and forensic evidence.
 
-### 1. The OSI Model (Layered Security)
-The 7-layer OSI model was analyzed not just as theory, but as a roadmap for troubleshooting and attacks.
-* **Key Concept:** Encapsulation. Data is "wrapped" in headers as it moves down the stack.
 
-* **Security Perspective:** Attacks can happen at any layer (e.g., Layer 2 MAC spoofing, Layer 3 IP spoofing, Layer 7 Web exploits).
 
-## Hands-On Technical Execution
+### 2. Access Control & Permissions
+I applied the **Principle of Least Privilege** by mastering `chmod` and `chown`. Understanding how to lock down sensitive files using octal permissions (like `chmod 700`) is the first line of defense against Privilege Escalation.
 
-### 2. Connectivity & Path Discovery
-Utilized Ping and Traceroute to audit the network path.
-* **Ping:** Used ICMP Echo Requests to test latency and RTT (Round Trip Time).
-* **Traceroute:** Observed the TTL (Time to Live) decrementing at each hop, revealing the routers between the VM and the target.
-* **Key Command:** `traceroute -n google.com` (Used -n to prevent DNS delays during path discovery).
 
-### 3. Port Enumeration & Service Mapping
-Identified entry points on the local system.
-* **TCP/UDP Ports:** Understood ports as "apartment numbers" for services.
-* **Tools:** Used `ss` (Socket Statistics) and `netstat`.
-* **Key Command:** `sudo ss -tulpn` (Identified PIDs and process names bound to specific ports).
-* **Service Dictionary:** Referenced `/etc/services` to correlate port numbers with standardized protocols.
 
-### 4. Active Reconnaissance (Nmap)
-Mastered Nmap for network auditing.
+### 3. Service Management
+Learned how to use `systemctl` to manage system daemons, specifically starting and checking the status of the SSH service to enable secure connections (and test my defenses).
 
-#### Techniques:
-* **Ping Sweep:** `nmap -sn` to discover live hosts without alerting firewalls with a full port scan.
-* **Service Versioning:** `nmap -sV` to identify exactly what software (and version) is running on an open port.
-* **OS Fingerprinting:** Used `-O` and `-A` to detect the underlying Operating System through TCP/IP stack behavior analysis.
+---
 
-### 5. Infrastructure Protocols (DNS & DHCP)
-Analyzed the "helper" protocols that maintain network order.
-* **DNS:** Investigated A, AAAA, and MX records using `dig` and `nslookup`.
-* **DHCP:** Observed the DORA process (Discover, Offer, Request, Acknowledge).
+## 🤖 The Project: SOC Log Scanner Automation
+I built a Bash script designed for a Security Operations Center (SOC) to automatically detect unauthorized brute-force access attempts. 
 
-* **Command:** `sudo dhclient -v` (Manually triggered a DHCP lease renewal to observe the handshake).
+**The Script (`scan_logs.sh`):**
+```bash
+#!/bin/bash
+# Universal Log Scanner v3.0
 
-### 6. Packet Analysis (Wireshark)
-Performed live traffic sniffing and protocol deconstruction.
+echo "=========================================="
+echo "    🔍 SOC SECURITY SCAN INITIALIZED     "
+echo "    TIME: $(date)                       "
+echo "=========================================="
 
-* **Key Filters:** `icmp`, `dns`, `tcp.port == 80`.
-* **Analysis:** Captured and inspected the TCP Three-Way Handshake (SYN, SYN-ACK, ACK).
-* **Troubleshooting:** Resolved VM "blank screen" issues by configuring Bridged Networking and enabling Promiscuous Mode to allow the virtual NIC to see all traffic on the segment.
+echo "[*] Searching for failed login attempts..."
+echo "------------------------------------------"
 
-## Badges & Progress Evidence
-* **TryHackMe Profile:** [https://tryhackme.com/p/CyberpunkSue](https://tryhackme.com/p/CyberpunkSue)
-* **Evidence:** Completion of "Intro to Networking," "Nmap," "HTTP in detail," and "DNS in Detail" modules.
-* **Wireshark Trace:** Successfully captured and filtered a 4-packet ICMP exchange and an HTTP GET request.
+# Queries the systemd journal for failed SSH attempts
+sudo journalctl -u ssh | grep -i "failed" | tail -n 5
 
-## Security-Relevant Takeaways
-* **Visibility is Security:** You cannot protect (or attack) what you cannot see. Wireshark and Nmap provide the necessary sight.
-* **Version Matters:** In Hour 4, I learned that knowing a service is "Open" isn't enough; knowing it's "OpenSSH 7.2p2" tells a researcher if it's vulnerable to specific exploits.
-* **The "Nesting Doll" Effect:** Seeing encapsulation in Wireshark proved how a single packet carries MAC, IP, and Port data simultaneously to reach its destination.
+## 🕵️ Red Team Simulation & Technical Forensics
 
-## Challenges Encountered & Resolutions
-* **Challenge:** Wireshark showed no interfaces or zero packets.
-* **Technical Root Cause:** VirtualBox NAT mode isolates the guest; permissions restricted raw socket access.
-* **Resolution:** Launched Wireshark with `sudo`, switched VM adapter to Bridged Mode, and enabled Promiscuous Mode in the VirtualBox advanced settings.
+To test the efficacy of my detection tool, I had to generate "attack" telemetry. I simulated a brute-force attack by targeting the local SSH daemon.
 
-## Skills Mapping (Day 02)
+* **Command:** `ssh fakeuser@localhost`
+* **Method:** Intentionally failed the password prompt multiple times to trigger security alerts in the system journal.
+* **Result:** My script successfully parsed the binary system logs, identifying the exact timestamps and unauthorized usernames associated with the failed attempts.
 
-| Skill Area | Evidence |
-| :--- | :--- |
-| Network Auditing | Usage of Nmap for host discovery and versioning. |
-| Traffic Analysis | Wireshark packet dissection and display filter mastery. |
-| Protocol Literacy | Deep understanding of OSI layers, TCP/UDP, DNS, and DHCP. |
-| Connectivity Troubleshooting | Proficient use of Ping, Traceroute, and ss. |
-| VM Infrastructure | Advanced configuration of VirtualBox network adapters for sniffing. |
 
-## Next Steps
-Day 3 will transition into Network Security & Defense, focusing on:
-* Firewall configurations (UFW/IPTables).
-* Understanding the basics of VPNs and encrypted tunnels.
-* Introductory Network Defense concepts (IDS/IPS).
 
-**End of Day 02**
+---
+
+## 🛠️ Troubleshooting & Technical Pivots (The Real Work)
+
+The most valuable part of today wasn't the successful run; it was the process of fixing the failures. Documentation of these pivots proves technical adaptability:
+
+### 1. Service Failure: "Connection Refused"
+* **The Issue:** My initial attack simulation failed because Port 22 was closed.
+* **The Fix:** Diagnosed that the SSH daemon was inactive. I used `sudo systemctl start ssh` to enable the listener and verified it with `systemctl status ssh`.
+
+### 2. Pathing & Execution Errors
+* **The Issue:** Encountered "No such directory" and "Permission denied" errors. 
+* **The Fix:** Used `pwd` (Print Working Directory) to verify my location and `ls -l` to audit file permissions. I then applied `chmod +x` to modify the file mode bits, granting the system permission to execute my script.
+
+
+
+### 3. Terminal Input Hangs
+* **The Issue:** Standard text editors and the `cat` command hung my terminal during script creation due to environment sync issues.
+* **The Fix:** I pivoted to using the `echo` command with output redirection (`>`) and append (`>>`) operators. This allowed me to construct the script line-by-line directly into the file without an interactive editor.
+
+### 4. Syntax Debugging (The "One Character" Rule)
+* **The Issue:** A minor typo (`jounalctl` instead of `journalctl`) broke the entire automation. 
+* **The Fix:** I performed a line-by-line audit of my script code. This served as a critical lesson: in cybersecurity, Linux is unforgiving with syntax, and one missing character can be the difference between a working defense tool and a total system failure.
+
+echo "------------------------------------------"
+echo "[+] Scan Complete."
+echo "=========================================="
