@@ -112,9 +112,9 @@ Concluded the day by applying hardening techniques to minimize the system's atta
 
 ### 🖼️ Technical Evidence Vault
 * **Practical evidence:** [View scan_logs.sh Script & Execution Screenshots](Evidence/)
-* **[Process Config Setup](win_taskmgr_config.):** Configuring Task Manager for security auditing.
-* **[Critical Process Audit](win_critical_processes.):** Verification of `lsass.exe` and `services.exe` legitimacy.
-* **[Registry Mapping](win_registry_hives):** Navigating the Windows Registry database structure.
-* **[Registry Core Config](win_hklm_navigation.):** Inspecting the HKLM hive for system-wide software configurations.
-* **[Log Analysis](win_event_log_4624.):** Investigating the Security Event Log for Event ID 4624 (Successful Logons).
-* **[Hardening Implementation](win_service_hardening.):** Disabling the Remote Registry service to reduce the system's attack surface.
+* **[Process Config Setup]:** Configuring Task Manager for security auditing.
+* **[Critical Process Audit]:** Verification of `lsass.exe` and `services.exe` legitimacy.
+* **[Registry Mapping]:** Navigating the Windows Registry database structure.
+* **[Registry Core Config]:** Inspecting the HKLM hive for system-wide software configurations.
+* **[Log Analysis]:** Investigating the Security Event Log for Event ID 4624 (Successful Logons).
+* **[Hardening Implementation]:** Disabling the Remote Registry service to reduce the system's attack surface.
