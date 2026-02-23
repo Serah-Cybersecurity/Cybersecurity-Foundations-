@@ -1,9 +1,9 @@
 # Day 03: Linux Fundamentals & Security Automation
 
-## 🎯 Overview
+##  Overview
 Today, I moved completely away from the GUI and spent over 6 hours navigating the Parrot OS terminal. I learned that Linux isn't just an operating system; it's a hierarchical security framework. My objective was to understand access control, service management, and how to automate forensic log analysis. 
 
-## 🧠 Key Concepts Mastered
+## Key Concepts Mastered
 
 ### 1. The Filesystem Hierarchy
 Linux operates on the philosophy that "Everything is a file." I navigated critical security paths to understand where a system is most vulnerable and where it stores its evidence.
@@ -22,7 +22,7 @@ Learned how to use `systemctl` to manage system daemons, specifically starting a
 
 ---
 
-## 🤖 The Project: SOC Log Scanner Automation
+##  The Project: SOC Log Scanner Automation
 I built a Bash script designed for a Security Operations Center (SOC) to automatically detect unauthorized brute-force access attempts. 
 
 **The Script (`scan_logs.sh`):**
@@ -41,7 +41,7 @@ echo "------------------------------------------"
 # Queries the systemd journal for failed SSH attempts
 sudo journalctl -u ssh | grep -i "failed" | tail -n 5
 ```
-## 🕵️ Red Team Simulation & Technical Forensics
+##  Red Team Simulation & Technical Forensics
 
 To test the efficacy of my detection tool, I had to generate "attack" telemetry. I simulated a brute-force attack by targeting the local SSH daemon.
 
@@ -53,7 +53,7 @@ To test the efficacy of my detection tool, I had to generate "attack" telemetry.
 
 ---
 
-## 🛠️ Troubleshooting & Technical Pivots (The Real Work)
+##  Troubleshooting & Technical Pivots (The Real Work)
 
 The most valuable part of today wasn't the successful run; it was the process of fixing the failures. Documentation of these pivots proves technical adaptability:
 
@@ -80,13 +80,13 @@ echo "[+] Scan Complete."
 echo "=========================================="
 
 
-## 🏆 Badges & Progress Evidence
+##  Badges & Progress Evidence
 * **TryHackMe Profile:** [https://tryhackme.com/p/CyberpunkSue](https://tryhackme.com/p/CyberpunkSue)
 * **Evidence:** Completion of "Linux Fundamentals " 
 * **Log Forensic Trace:** Successfully simulated a brute-force SSH attack and utilized `journalctl` to capture the 5-entry "Failed Password" sequence.
 * **Automation Implementation:** [View scan_logs.sh Script & Execution Screenshots](Evidence/)
 
-## 🛡️ Security-Relevant Takeaways
+## Security-Relevant Takeaways
 * **Permissions are the First Line of Defense:** Mastering `chmod` and `chown` isn't just about file organization; it's about enforcing the **Principle of Least Privilege** to prevent an attacker from escalating their access.
 * **Automation is a Force Multiplier:** In Hour 5, I learned that a SOC analyst shouldn't just "read" logs. By scripting the search process, I reduced the **Mean Time to Detect (MTTD)** from several minutes of manual searching to 1.5 seconds of automated execution.
 * **The "Persistence" Mindset:** Troubleshooting "Connection Refused" (SSH service management) and script typos taught me that in cybersecurity, technical resilience is just as important as technical knowledge. You have to understand the underlying service to secure it.
