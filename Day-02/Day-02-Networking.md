@@ -61,7 +61,7 @@ Performed live traffic sniffing and protocol deconstruction.
 * **TryHackMe Profile:** [https://tryhackme.com/p/CyberpunkSue](https://tryhackme.com/p/CyberpunkSue)
 * **Evidence:** Completion of "Intro to Networking," "Nmap," "HTTP in detail," and "DNS in Detail" modules.
 * **Wireshark Trace:** Successfully captured and filtered a 4-packet ICMP exchange and an HTTP GET request.
-* **Live Traffic Analysis:** * [View Captured Screenshots](Images/)
+* **Live Traffic Analysis:** * [View Captured Screenshots](Evidence/)
 
 ## Security-Relevant Takeaways
 * **Visibility is Security:** You cannot protect (or attack) what you cannot see. Wireshark and Nmap provide the necessary sight.
