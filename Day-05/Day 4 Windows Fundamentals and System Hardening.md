@@ -131,9 +131,10 @@ Get-EventLog -LogName Security -InstanceId 4624, 4625 -Newest 10 | Select-Object
 ---
 
 ## 📸 Evidence & Artifacts
-1. **Process Monitoring:** `![Process Monitoring](assets/process_mon.png)`
-2. **Log Querying:** `![Log Query](assets/log_query.png)`
-3. **Automation Result:** `![Script Execution](assets/script_result.png)`
+1. * **Practical evidence** [View scan_logs.sh Script & Execution Screenshots](Evidence/)
+2.  **Process Monitoring**
+3. **Log Querying** 
+4. **Automation Result** 
 
 ---
 
